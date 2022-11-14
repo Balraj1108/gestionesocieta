@@ -1,11 +1,11 @@
 package it.prova.gestionesocieta.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +52,12 @@ public class DipendenteServiceImpl implements DipendenteService {
 	@Transactional
 	public void rimuovi(Dipendente dipendenteInstance) {
 		dipendenteRepository.delete(dipendenteInstance);
+	}
+
+	@Override
+	public Dipendente orderByDataAssunzione_dataFondazioneGreatherThan(Date dataFon) {
+		// TODO Auto-generated method stub
+		return dipendenteRepository.findFirst1BySocieta_DataFondazioneBeforeOrderByDataAssunzioneAsc(dataFon);
 	}
 
 }

@@ -18,4 +18,7 @@ public interface SocietaService {
 	public void rimuovi(Societa societaInstance);
 
 	public List<Societa> findByExample(Societa example);
+	
+	public List<Societa> findAllDistinctByDipendenti_RedditoAnnuoLordoGreaterThan(Integer ral);
+	
 }

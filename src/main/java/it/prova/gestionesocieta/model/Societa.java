@@ -48,6 +48,14 @@ public class Societa {
 		this.dataFondazione = dataFondazione;
 	}
 
+	
+
+	public Societa(String ragioneSociale, String indirizzo) {
+		super();
+		this.ragioneSociale = ragioneSociale;
+		this.indirizzo = indirizzo;
+	}
+
 	public Long getId() {
 		return id;
 	}

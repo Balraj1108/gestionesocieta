@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.prova.gestionesocieta.exceptions.SocietaConAlmenoUnDipendenteException;
 import it.prova.gestionesocieta.model.Societa;
 import it.prova.gestionesocieta.repository.SocietaRepository;
 
@@ -57,8 +58,17 @@ public class SocietaServiceImpl implements SocietaService {
 		
 	}
 
+	
 	@Transactional
 	public void rimuovi(Societa societaInstance) {
+		
+		TypedQuery<Societa> query = entityManager
+				.createQuery("select s from Societa s join fetch s.dipendenti d where s.id = :id", Societa.class)
+				.setParameter("id", societaInstance.getId());
+		if (!query.getResultList().isEmpty()) {
+			throw new SocietaConAlmenoUnDipendenteException("Societa ha almeno un dipendente ad esso");
+		}
+		
 		societaRepository.delete(societaInstance);
 	}
 
@@ -94,6 +104,12 @@ public class SocietaServiceImpl implements SocietaService {
 		return typedQuery.getResultList();
 
 	
+	}
+
+	@Override
+	public List<Societa> findAllDistinctByDipendenti_RedditoAnnuoLordoGreaterThan(Integer ral) {
+		// TODO Auto-generated method stub
+		return societaRepository.findAllDistinctByDipendenti_redittoAnnuoLordoGreaterThan(ral);
 	}
 
 }
