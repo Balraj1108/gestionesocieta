@@ -54,20 +54,4 @@ public class DipendenteServiceImpl implements DipendenteService {
 		dipendenteRepository.delete(dipendenteInstance);
 	}
 
-	@Override
-	public List<Dipendente> findByExample(Dipendente example) {
-		String query = "select a from Abitante a where a.id = a.id ";
-
-		if (StringUtils.isNotEmpty(example.getNome()))
-			query += " and a.nome like '%" + example.getNome() + "%' ";
-		if (StringUtils.isNotEmpty(example.getCognome()))
-			query += " and a.cognome like '%" + example.getCognome() + "%' ";
-		if (example.getRedittoAnnuoLordo() != null && example.getRedittoAnnuoLordo() > 0)
-			query += " and a.eta = " + example.getRedittoAnnuoLordo();
-		if ((example.getDataAssunzione()) != null)
-			query += " and a.residenza like '%" + example.getDataAssunzione() + "%' ";
-
-		return entityManager.createQuery(query, Dipendente.class).getResultList();
-	}
-
 }

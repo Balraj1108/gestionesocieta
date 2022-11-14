@@ -53,13 +53,12 @@ public class BatteriaDiTestService {
 			e.printStackTrace();
 		}
 		//societaProva.setDataFondazione(datadiprova);
-		//societaProva.setRagioneSociale("euron");
+		societaProva.setRagioneSociale("euron");
 		List<Societa> listaSocieta = new ArrayList<>();
 		
 		listaSocieta = societaService.findByExample(societaProva);
-		System.out.println(listaSocieta.size());
-		System.out.println(societaProva);
-		if (listaSocieta.size() <0)
+		
+		if (listaSocieta.size() != 1)
 			throw new RuntimeException("testFindByExampleSocieta...failed: inserimento fallito");
 
 		System.out.println("testFindByExampleSocieta........OK");
